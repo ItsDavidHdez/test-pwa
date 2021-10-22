@@ -1,12 +1,21 @@
 import React from "react";
-import { Camioneta } from "./Camioneta";
 
-function App() {
+const App = () => {
+  const [text, setText] = React.useState();
+
+  let loading;
+
+  React.useEffect(() => {
+    loading ? setText("Loading...") : setText("All ready");
+    console.log("Estoy renderizando");
+  }, [loading]);
+
   return (
-    <div className="App">
-      <Camioneta />
+    <div>
+      <h1>Activity 1</h1>
+      <h2>{text}</h2>
     </div>
   );
-}
+};
 
-export default App;
+export { App };
