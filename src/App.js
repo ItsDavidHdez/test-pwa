@@ -1,21 +1,45 @@
 import React from "react";
+import { gql, useQuery } from "@apollo/client";
 
-const App = () => {
-  const [text, setText] = React.useState();
+const GET_DOG_PHOTO = gql`
+  query Dog($breed: String!) {
+    dog(breed: $breed) {
+      id
+      displayImage
+    }
+  }
+`;
 
-  let loading;
+function DogPhoto({ breed }) {
+  const { loading, error, data } = useQuery(GET_DOG_PHOTO, {
+    variables: {
+      breed,
+    },
+  });
+  const [datas, setDatas] = React.useState(data);
 
   React.useEffect(() => {
-    loading ? setText("Loading...") : setText("All ready");
-    console.log("Estoy renderizando");
-  }, [loading]);
+    if (data) {
+      setDatas(data);
+    }
+  }, [data]);
+
+  if (loading) return null;
+  if (error) return `Error ${error}`;
 
   return (
-    <div>
-      <h1>Activity 1</h1>
-      <h2>{text}</h2>
-    </div>
+    <>
+      {datas ? (
+        <img
+          src={data.dog.displayImage}
+          style={{ width: "100px" }}
+          alt="Perrito"
+        />
+      ) : (
+        loading
+      )}
+    </>
   );
-};
+}
 
-export { App };
+export { DogPhoto };
