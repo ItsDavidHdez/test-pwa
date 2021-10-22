@@ -2,11 +2,11 @@ import React from "react";
 import { ItemContext } from "./context/ItemContext";
 
 const Camioneta = () => {
-  const { item } = React.useContext(ItemContext);
+  const { item, camioneta } = React.useContext(ItemContext);
 
   return (
     <>
-      <h1>Camioneta</h1>
+      <h1>{camioneta}</h1>
     </>
   );
 };

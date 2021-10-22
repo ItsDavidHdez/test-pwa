@@ -10,9 +10,11 @@ const ItemProvider = ({ children }) => {
     agencia: "agency",
   });
 
+  const camioneta = "Camioneta";
+
   return (
     <>
-      <Provider value={{ item }}>{children}</Provider>
+      <Provider value={{ item, camioneta }}>{children}</Provider>
     </>
   );
 };
